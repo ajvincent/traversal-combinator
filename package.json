@@ -1,0 +1,40 @@
+{
+  "name": "traversal-combinator",
+  "version": "0.1.0",
+  "description": "Break up complicated tree traversals into unit-testable components.",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "jasmine",
+    "debug": "node --inspect-brk node_modules/jasmine/bin/jasmine.js",
+    "eslint": "eslint docs spec *.mjs",
+    "playground": "node playground.mjs",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajvincent/traversal-combinator.git"
+  },
+  "keywords": [
+    "traversal",
+    "combinator",
+    "codegenerator"
+  ],
+  "author": "Alexander J. Vincent <ajvincent@gmail.com>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/ajvincent/traversal-combinator/issues"
+  },
+  "homepage": "https://github.com/ajvincent/traversal-combinator#readme",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.14.0",
+    "eslint-plugin-jasmine": "^4.1.3",
+    "eslint-plugin-jsdoc": "^39.2.8",
+    "express": "^4.17.3",
+    "express-ipfilter": "^1.2.0",
+    "jasmine": "^4.1.0",
+    "typescript": "^4.6.3"
+  }
+}

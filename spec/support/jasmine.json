@@ -1,0 +1,14 @@
+{
+  "spec_dir": "spec",
+  "spec_files": [
+    "**/*.?(m)js",
+    "!**/http-fixtures/*.mjs",
+    "!**/http-fixtures/**/*.mjs",
+    "!**/support/**.mjs"
+  ],
+  "helpers": [
+    "helpers/**/*.?(m)js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+}
