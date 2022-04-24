@@ -40,5 +40,8 @@
   "imports": {
     "#exports/*": "./docs/exports",
     "#support/*": "./spec/support/*"
-  }
+  },
+  "files": [
+    "docs/exports/**"
+  ]
 }
