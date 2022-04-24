@@ -36,5 +36,9 @@
     "express-ipfilter": "^1.2.0",
     "jasmine": "^4.1.0",
     "typescript": "^4.6.3"
+  },
+  "imports": {
+    "#exports/*": "./docs/exports",
+    "#support/*": "./spec/support/*"
   }
 }
