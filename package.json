@@ -1,7 +1,7 @@
 {
   "name": "traversal-combinator",
   "version": "0.1.0",
-  "description": "Break up complicated tree traversals into unit-testable components.",
+  "description": "Break up complicated tree traversals into unit-testable components!",
   "main": "index.mjs",
   "scripts": {
     "test": "jasmine",
