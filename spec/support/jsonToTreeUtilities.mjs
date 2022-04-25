@@ -11,13 +11,19 @@ export class JSONNode {
   /** @type {string} */
   keyName;
 
-  /** @type {string} */
+  /** @type {"array" | "null" | "object" | "string" | "number" | "boolean"} */
   type;
 
-  /** @type {any} */
+  /** @type {never[] | null | { never: string } | string | number | boolean} */
   value;
 
-  /** @type {any} */
+  /**
+   * The children of this node.
+   * In the case where this is an object, the keys will be strings and the
+   * values will be JSONNode objects.
+   *
+   * @type {JSONNode[] | string | number | boolean | object}
+   */
   children;
 
   /** @type {JSONNode | undefined} */
@@ -106,7 +112,14 @@ export class JSONTreeWalker {
     this.#root = root;
   }
 
+  filter(node) {
+    void(node)
+    return true;
+  }
+
   /**
+   * Traverse a tree in your standard in-order traversal.
+   *
    * @param {JSONNodeBaseVisitor} visitor The visitor
    */
   visitNodes(visitor) {
@@ -125,7 +138,9 @@ export class JSONTreeWalker {
       }
 
       if (front.pendingChildren.length) {
-        stack.unshift(new JSONTreeWalkerStackItem(front.pendingChildren.shift()))
+        let pendingChild = front.pendingChildren.shift();
+        if (this.filter(pendingChild))
+          stack.unshift(new JSONTreeWalkerStackItem(pendingChild));
         continue;
       }
 
@@ -153,11 +168,20 @@ export class JSONNodeBaseVisitor {
   }
 }
 
+/**
+ * A class to reconstruct a JSON object from a JSONNode instance.
+ */
 export class JSONReconstructorVisitor extends JSONNodeBaseVisitor {
+  /** @type {any[]} */
   #stack = [];
+
+  /** @type {any} */
   #root;
 
+  /** @type {boolean} */
   #exceptionThrown = false;
+
+  /** @type {unknown} */
   #exception;
 
   #handleException(ex) {
@@ -168,6 +192,11 @@ export class JSONReconstructorVisitor extends JSONNodeBaseVisitor {
     throw ex;
   }
 
+  /**
+   * Observe entering a node.
+   *
+   * @param {JSONNode} node The current node on the traversal stack.
+   */
   enter(node) {
     try {
       let value = node.value;
@@ -189,6 +218,11 @@ export class JSONReconstructorVisitor extends JSONNodeBaseVisitor {
     }
   }
 
+  /**
+   * Observe leaving a node.
+   *
+   * @param {JSONNode} node The current node on the traversal stack.
+   */
   leave(node) {
     try {
       const value = this.#stack.shift();
@@ -205,6 +239,9 @@ export class JSONReconstructorVisitor extends JSONNodeBaseVisitor {
     }
   }
 
+  /**
+   * @returns {any} The reconstructed root.
+   */
   get root() {
     return this.#root;
   }
