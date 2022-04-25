@@ -27,6 +27,7 @@
   "homepage": "https://github.com/ajvincent/traversal-combinator#readme",
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
+    "@types/jasmine": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "eslint": "^8.14.0",
